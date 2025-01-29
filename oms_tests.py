@@ -6,7 +6,7 @@ class TestOrderManagement(unittest.TestCase):
     def setUp(self):
         start_time = datetime.now().replace(hour=10, minute=0, second=0, microsecond=0).time()
         end_time = datetime.now().replace(hour=13, minute=0, second=0, microsecond=0).time()
-        self.oms = OrderManagement(start_time, end_time, max_orders_per_second=2)
+        self.oms = OrderManagement(start_time, end_time, mos=2)
 
     def tearDown(self):
         self.oms.stop()

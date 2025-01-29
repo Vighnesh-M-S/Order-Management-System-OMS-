@@ -36,10 +36,10 @@ class OrderResponse:
         self.m_responseType = response_type
 
 class OrderManagement:
-    def __init__(self, start_time, end_time, max_orders_per_second):
+    def __init__(self, start_time, end_time, mos):
         self.start_time = start_time
         self.end_time = end_time
-        self.max_orders_per_second = max_orders_per_second
+        self.max_orders_per_second = mos
         self.order_queue = deque()
         self.order_lock = threading.Lock()
         self.response_log = []
@@ -70,7 +70,7 @@ class OrderManagement:
                 for _ in range(min(len(self.order_queue), self.max_orders_per_second)):
                     order = self.order_queue.popleft()
                     self.send(order)
-            time.sleep(1)  # Ensure throttling to 1-second intervals
+            time.sleep(1)  
 
     def onData(self, request):
         if not self.is_within_time_window():
